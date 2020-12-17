@@ -19,6 +19,11 @@ from metric.review_comments import ReviewComments
 from metric.src_churn import SrcChurn
 from metric.total_comments import TotalComments
 
+from control_variables.add_files import AddFiles
+from control_variables.changing_files import ChangingFiles
+from control_variables.delete_files import DeleteFiles
+from control_variables.modified_files import ModifiedFiles
+
 gl = gitlab.Gitlab(os.environ['GITLAB_URI'], private_token=os.environ['GITLAB_PRIVATE_TOKEN'])
 bci = BuildCorrectionInterval(gl)
 cl = CiLatency(gl)
@@ -38,6 +43,11 @@ rc = ReviewComments(gl)
 sc = SrcChurn(gl)
 tfr = FirstResponseTime(gl)
 tc = TotalComments(gl)
+
+af = AddFiles(gl)
+cf = ChangingFiles(gl)
+df = DeleteFiles(gl)
+mf = ModifiedFiles(gl)
 
 if __name__ == '__main__':
     print('Gitlab Listener')
