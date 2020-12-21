@@ -3,8 +3,8 @@ from datetime import datetime
 datetime_format = '%Y-%m-%dT%H:%M:%S.%fZ'
 
 
-def compute_bci(project):
-    for merge_request in project.mergerequests.list(all=True):
+def compute_bci(merge_requests):
+    for merge_request in merge_requests:
         pipelines = merge_request.pipelines()
         pipelines.sort(key=pipeline_sort)
 
