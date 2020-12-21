@@ -21,7 +21,7 @@ from metric.total_comments import TotalComments
 
 from control_variables.add_files import compute_af
 from control_variables.changing_files import compute_cf
-from control_variables.delete_files import DeleteFiles
+from control_variables.delete_files import compute_df
 from control_variables.modified_files import ModifiedFiles
 
 gl = gitlab.Gitlab.from_config('global', ['.python-gitlab.cfg'])
@@ -45,15 +45,15 @@ sc = SrcChurn(gl)
 tfr = FirstResponseTime(gl)
 tc = TotalComments(gl)
 
-df = DeleteFiles(gl)
 mf = ModifiedFiles(gl)
 
 if __name__ == '__main__':
     for project_id in project_ids:
         project = gl.projects.get(project_id)
-        merge_requests = project.mergerequests.list()
+        merge_requests = project.mergerequests.list(all=True)
 
-        # compute_bci(merge_requests)
+        compute_bci(merge_requests)
 
         compute_af(merge_requests)
-        # compute_cf(merge_requests)
+        compute_df(merge_requests)
+        compute_cf(merge_requests)
