@@ -1,6 +1,6 @@
 import gitlab
 import os
-from metric.build_correction_interval import BuildCorrectionInterval
+from metric.build_correction_interval import compute_bci
 from metric.ci_latency import CiLatency
 from metric.ci_result import CiResult
 from metric.closure_time import ClosureTime
@@ -24,8 +24,9 @@ from control_variables.changing_files import ChangingFiles
 from control_variables.delete_files import DeleteFiles
 from control_variables.modified_files import ModifiedFiles
 
-gl = gitlab.Gitlab(os.environ['GITLAB_URI'], private_token=os.environ['GITLAB_PRIVATE_TOKEN'])
-bci = BuildCorrectionInterval(gl)
+gl = gitlab.Gitlab.from_config('global', ['.python-gitlab.cfg'])
+project_ids = list(os.environ['PROJECTS'].split(","))
+
 cl = CiLatency(gl)
 cr = CiResult(gl)
 ct = ClosureTime(gl)
@@ -50,4 +51,7 @@ df = DeleteFiles(gl)
 mf = ModifiedFiles(gl)
 
 if __name__ == '__main__':
-    print('Gitlab Listener')
+    for project_id in project_ids:
+        project = gl.projects.get(project_id)
+
+        compute_bci(project)
