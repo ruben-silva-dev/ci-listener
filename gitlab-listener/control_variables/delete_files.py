@@ -1,6 +1,10 @@
-class DeleteFiles:
-    def __init__(self, gitlab):
-        self.gitlab = gitlab
+def compute_df(merge_requests):
+    for merge_request in merge_requests:
+        mr_changes = merge_request.changes()['changes']
 
-    def compute(self, project, start_date, end_date):
-        print("Arquivos Apagados")
+        delete_count = 0
+        for change in mr_changes:
+            if change['deleted_file']:
+                delete_count += 1
+
+        print("Deleted files:", delete_count)
