@@ -22,7 +22,7 @@ from metric.total_comments import TotalComments
 from control_variables.add_files import compute_af
 from control_variables.changing_files import compute_cf
 from control_variables.delete_files import compute_df
-from control_variables.modified_files import ModifiedFiles
+from control_variables.modified_files import compute_mf
 
 gl = gitlab.Gitlab.from_config('global', ['.python-gitlab.cfg'])
 project_ids = list(os.environ['PROJECTS'].split(","))
@@ -45,7 +45,6 @@ sc = SrcChurn(gl)
 tfr = FirstResponseTime(gl)
 tc = TotalComments(gl)
 
-mf = ModifiedFiles(gl)
 
 if __name__ == '__main__':
     for project_id in project_ids:
@@ -57,3 +56,4 @@ if __name__ == '__main__':
         compute_af(merge_requests)
         compute_df(merge_requests)
         compute_cf(merge_requests)
+        compute_mf(merge_requests)
