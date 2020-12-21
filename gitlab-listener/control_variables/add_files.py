@@ -1,6 +1,10 @@
-class AddFiles:
-    def __init__(self, gitlab):
-        self.gitlab = gitlab
+def compute_af(merge_requests):
+    for merge_request in merge_requests:
+        mr_changes = merge_request.changes()['changes']
 
-    def compute(self, project, start_date, end_date):
-        print("Arquivos Adicionados")
+        add_count = 0
+        for change in mr_changes:
+            if change['new_file']:
+                add_count += 1
+
+        print("Added files:", add_count)

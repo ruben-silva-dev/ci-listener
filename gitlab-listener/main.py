@@ -19,7 +19,7 @@ from metric.review_comments import ReviewComments
 from metric.src_churn import SrcChurn
 from metric.total_comments import TotalComments
 
-from control_variables.add_files import AddFiles
+from control_variables.add_files import compute_af
 from control_variables.changing_files import compute_cf
 from control_variables.delete_files import DeleteFiles
 from control_variables.modified_files import ModifiedFiles
@@ -45,15 +45,15 @@ sc = SrcChurn(gl)
 tfr = FirstResponseTime(gl)
 tc = TotalComments(gl)
 
-af = AddFiles(gl)
 df = DeleteFiles(gl)
 mf = ModifiedFiles(gl)
 
 if __name__ == '__main__':
     for project_id in project_ids:
         project = gl.projects.get(project_id)
-        merge_requests = project.mergerequests.list(all=True)
+        merge_requests = project.mergerequests.list()
 
-        compute_bci(merge_requests)
+        # compute_bci(merge_requests)
 
-        compute_cf(merge_requests)
+        compute_af(merge_requests)
+        # compute_cf(merge_requests)
