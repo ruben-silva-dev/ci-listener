@@ -8,7 +8,7 @@ from metric.effective_comments import EffectiveComments
 from metric.first_response_time import FirstResponseTime
 from metric.general_comments import GeneralComments
 from metric.merge_time import MergeTime
-from metric.number_builds import NumberBuilds
+from metric.builds_number import compute_bn
 from metric.number_code_test_changed import NumberCodeTestChanged
 from metric.number_commits import NumberCommits
 from metric.number_jobs import NumberJobs
@@ -33,7 +33,6 @@ ct = ClosureTime(gl)
 ec = EffectiveComments(gl)
 gc = GeneralComments(gl)
 mt = MergeTime(gl)
-nb = NumberBuilds(gl)
 nct = NumberCodeTestChanged(gl)
 nc = NumberCommits(gl)
 nj = NumberJobs(gl)
@@ -52,6 +51,7 @@ if __name__ == '__main__':
         merge_requests = project.mergerequests.list(all=True)
 
         compute_bci(merge_requests)
+        compute_bn(merge_requests)
 
         compute_af(merge_requests)
         compute_df(merge_requests)
