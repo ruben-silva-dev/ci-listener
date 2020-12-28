@@ -2,7 +2,7 @@ import gitlab
 import os
 from metric.build_correction_interval import compute_bci
 from metric.ci_latency import CiLatency
-from metric.ci_result import CiResult
+from metric.ci_result import compute_cr
 from metric.closure_time import ClosureTime
 from metric.effective_comments import EffectiveComments
 from metric.first_response_time import FirstResponseTime
@@ -28,7 +28,6 @@ gl = gitlab.Gitlab.from_config('global', ['.python-gitlab.cfg'])
 project_ids = list(os.environ['PROJECTS'].split(","))
 
 cl = CiLatency(gl)
-cr = CiResult(gl)
 ct = ClosureTime(gl)
 ec = EffectiveComments(gl)
 gc = GeneralComments(gl)
@@ -50,6 +49,7 @@ if __name__ == '__main__':
         project = gl.projects.get(project_id)
         merge_requests = project.mergerequests.list(all=True)
 
+        compute_cr(merge_requests)
         compute_bci(merge_requests)
         compute_bn(merge_requests)
 

@@ -1,5 +1,8 @@
-class CiResult:
-    def __init__(self,gitlab):
-        self.gitlab = gitlab
-    def compute(self, project, start_date, end_date):
-        print("Resultados de integração contínua")
+def compute_cr(merge_requests):
+    for merge_request in merge_requests:
+        pipelines = merge_request.pipelines()
+
+        for pipeline in pipelines:
+            if pipeline['status'] == 'failed':
+                print("True")
+                break
