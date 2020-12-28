@@ -49,9 +49,9 @@ if __name__ == '__main__':
         project = gl.projects.get(project_id)
         merge_requests = project.mergerequests.list(all=True)
 
-        # compute_cr(merge_requests)
-        # compute_bci(merge_requests)
-        # compute_bn(merge_requests)
+        compute_cr(merge_requests)
+        compute_bci(merge_requests)
+        compute_bn(merge_requests)
 
         compute_af(merge_requests)
         compute_df(merge_requests)
