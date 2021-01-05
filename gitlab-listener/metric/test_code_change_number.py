@@ -1,7 +1,7 @@
 import re
 
 
-def compute_tc(merge_requests):
+def compute_tccn(merge_requests):
     for merge_request in merge_requests:
         changes = merge_request.changes()
 

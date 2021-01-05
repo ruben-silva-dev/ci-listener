@@ -1,5 +1,6 @@
 class FirstResponseTime:
-    def __init__(self,gitlab):
+    def __init__(self, gitlab):
         self.gitlab = gitlab
+
     def compute(self, project, start_date, end_date):
         print("Tempo até a primeira resposta")
