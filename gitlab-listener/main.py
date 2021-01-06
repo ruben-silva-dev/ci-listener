@@ -10,21 +10,22 @@ from metric.general_comments import GeneralComments
 from metric.merge_time import MergeTime
 from metric.builds_number import compute_bn
 from metric.number_code_test_changed import NumberCodeTestChanged
-from metric.number_commits import NumberCommits
+from metric.number_commits import compute_nc
 from metric.number_jobs import NumberJobs
 from metric.number_mentions import NumberMentions
-from metric.number_participants import NumberParticipants
+from metric.number_participants import compute_np
 from metric.review_code_time import ReviewCodeTime
 from metric.review_comments import ReviewComments
 from metric.src_churn import SrcChurn
-from metric.total_comments import TotalComments
+
+from metric.total_comments import compute_tc
 
 from control_variables.add_files import compute_af
 from control_variables.changing_files import compute_cf
 from control_variables.delete_files import compute_df
 from control_variables.modified_files import compute_mf
 
-gl = gitlab.Gitlab.from_config('global', ['.python-gitlab.cfg'])
+gl = gitlab.Gitlab.from_config('global', ['python-gitlab.cfg'])
 project_ids = list(os.environ['PROJECTS'].split(","))
 
 cl = CiLatency(gl)
@@ -34,21 +35,24 @@ ec = EffectiveComments(gl)
 gc = GeneralComments(gl)
 mt = MergeTime(gl)
 nct = NumberCodeTestChanged(gl)
-nc = NumberCommits(gl)
+nc = compute_nc(gl)
 nj = NumberJobs(gl)
 nm = NumberMentions(gl)
-np = NumberParticipants(gl)
+np = compute_np(gl)
 rtc = ReviewCodeTime(gl)
 rc = ReviewComments(gl)
 sc = SrcChurn(gl)
 tfr = FirstResponseTime(gl)
-tc = TotalComments(gl)
+tc = compute_tc(gl)
 
 
 if __name__ == '__main__':
     for project_id in project_ids:
         project = gl.projects.get(project_id)
         merge_requests = project.mergerequests.list(all=True)
+
+        compute_tc(merge_requests)
+        compute_nc(merge_requests)
 
         compute_bci(merge_requests)
         compute_bn(merge_requests)
