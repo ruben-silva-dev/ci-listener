@@ -23,7 +23,7 @@ from metric.review_code_time import ReviewCodeTime
 from metric.review_comments import ReviewComments
 from metric.source_code_change_number import compute_sccn
 from metric.test_code_change_number import compute_tccn
-from metric.total_comments import TotalComments
+from metric.total_comments import compute_tc
 
 gl = gitlab.Gitlab.from_config('global', ['.python-gitlab.cfg'])
 project_ids = list(os.environ['PROJECTS'].split(","))
@@ -39,7 +39,7 @@ np = NumberParticipants(gl)
 rtc = ReviewCodeTime(gl)
 rc = ReviewComments(gl)
 tfr = FirstResponseTime(gl)
-tc = TotalComments(gl)
+tc = compute_tc(gl)
 
 if __name__ == '__main__':
     for project_id in project_ids:
@@ -52,6 +52,7 @@ if __name__ == '__main__':
         compute_jn(project, merge_requests)
         compute_sccn(merge_requests)
         compute_tccn(merge_requests)
+        compute_tc(merge_requests)
 
         compute_af(merge_requests)
         compute_df(merge_requests)
