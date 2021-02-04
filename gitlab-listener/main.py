@@ -11,7 +11,7 @@ from metric.builds_number import compute_bn
 from metric.ci_latency import CiLatency
 from metric.ci_result import compute_cr
 from metric.closure_time import ClosureTime
-from metric.commits_number import compute_nc
+from metric.commits_number import compute_cn
 from metric.effective_comments import EffectiveComments
 from metric.first_response_time import FirstResponseTime
 from metric.general_comments import GeneralComments
@@ -36,17 +36,16 @@ np = NumberParticipants(gl)
 rtc = ReviewCodeTime(gl)
 rc = ReviewComments(gl)
 tfr = FirstResponseTime(gl)
-# tc = compute_tc(gl)
 
 if __name__ == '__main__':
     for project_id in project_ids:
         project = gl.projects.get(project_id)
         merge_requests = project.mergerequests.list(all=True)
 
-        compute_nc(merge_requests)
         compute_bci(merge_requests)
         compute_bn(merge_requests)
         compute_cr(merge_requests)
+        compute_cn(merge_requests)
         compute_jn(project, merge_requests)
         compute_mn(merge_requests)
         compute_sccn(merge_requests)
