@@ -13,6 +13,7 @@ from metric.ci_result import compute_cr
 from metric.closure_time import ClosureTime
 from metric.commits_number import compute_cn
 from metric.effective_comments import EffectiveComments
+from metric.first_human_response import compute_fhr
 from metric.first_response_time import FirstResponseTime
 from metric.general_comments import GeneralComments
 from metric.jobs_number import compute_jn
@@ -47,6 +48,7 @@ if __name__ == '__main__':
         compute_bn(merge_requests)
         compute_cr(merge_requests)
         compute_cn(merge_requests)
+        compute_fhr(merge_requests)
         compute_jn(project, merge_requests)
         compute_mn(merge_requests)
         compute_sccn(merge_requests)
