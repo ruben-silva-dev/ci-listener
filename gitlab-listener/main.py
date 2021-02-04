@@ -19,7 +19,7 @@ from metric.general_comments import GeneralComments
 from metric.jobs_number import compute_jn
 from metric.mention_number import compute_mn
 from metric.merge_time import MergeTime
-from metric.number_participants import NumberParticipants
+from metric.number_participants import compute_np
 from metric.review_code_time import compute_rct
 from metric.review_comments import ReviewComments
 from metric.source_code_change_number import compute_sccn
@@ -33,7 +33,6 @@ ct = ClosureTime(gl)
 ec = EffectiveComments(gl)
 gc = GeneralComments(gl)
 mt = MergeTime(gl)
-np = NumberParticipants(gl)
 rc = ReviewComments(gl)
 tfr = FirstResponseTime(gl)
 
@@ -42,6 +41,7 @@ if __name__ == '__main__':
         project = gl.projects.get(project_id)
         merge_requests = project.mergerequests.list(all=True)
 
+        compute_np(merge_requests)
         compute_bci(merge_requests)
         compute_bn(merge_requests)
         compute_cl(merge_requests)
