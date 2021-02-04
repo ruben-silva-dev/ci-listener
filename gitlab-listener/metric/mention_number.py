@@ -1,7 +1,7 @@
 import re
 
-
-exclusoes = ['@GetMapping', '@github.com', '@PreAuthorize', '@Secured', '@Inject', '@Inject.', '@OneToMany', '@AutenticationPrincipal', '@Query', '@Query.', '@click', '@ModelAttribute']
+exclusoes = ['@GetMapping', '@github.com', '@PreAuthorize', '@Secured', '@Inject', '@Inject.', '@OneToMany',
+             '@AutenticationPrincipal', '@Query', '@Query.', '@click', '@ModelAttribute']
 
 
 def compute_mn(merge_requests):
