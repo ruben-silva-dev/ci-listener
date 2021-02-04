@@ -1,6 +1,7 @@
-class NumberCommits:
-    def __init__(self, gitlab):
-        self.gitlab = gitlab
-
-    def compute(self, project, start_date, end_date):
-        print("Número de commits")
+def compute_nc(merge_requests):
+    for merge_request in merge_requests:
+        commits = merge_request.commits()
+        count = 0
+        for commit in commits:
+            count = count + 1
+        print(count)
