@@ -18,7 +18,7 @@ from metric.first_response_time import FirstResponseTime
 from metric.general_comments import GeneralComments
 from metric.jobs_number import compute_jn
 from metric.mention_number import compute_mn
-from metric.merge_time import MergeTime
+from metric.merge_time import compute_mt
 from metric.number_participants import NumberParticipants
 from metric.review_code_time import compute_rct
 from metric.review_comments import ReviewComments
@@ -32,7 +32,6 @@ project_ids = list(os.environ['PROJECTS'].split(","))
 ct = ClosureTime(gl)
 ec = EffectiveComments(gl)
 gc = GeneralComments(gl)
-mt = MergeTime(gl)
 np = NumberParticipants(gl)
 rc = ReviewComments(gl)
 tfr = FirstResponseTime(gl)
@@ -42,20 +41,21 @@ if __name__ == '__main__':
         project = gl.projects.get(project_id)
         merge_requests = project.mergerequests.list(all=True)
 
-        compute_bci(merge_requests)
-        compute_bn(merge_requests)
-        compute_cl(merge_requests)
-        compute_cr(merge_requests)
-        compute_cn(merge_requests)
-        compute_fhr(merge_requests)
-        compute_jn(project, merge_requests)
-        compute_mn(merge_requests)
-        compute_rct(merge_requests)
-        compute_sccn(merge_requests)
-        compute_tccn(merge_requests)
-        compute_tc(merge_requests)
+        compute_mt(merge_requests)
+        # compute_bci(merge_requests)
+        # compute_bn(merge_requests)
+        # compute_cl(merge_requests)
+        # compute_cr(merge_requests)
+        # compute_cn(merge_requests)
+        # compute_fhr(merge_requests)
+        # compute_jn(project, merge_requests)
+        # compute_mn(merge_requests)
+        # compute_rct(merge_requests)
+        # compute_sccn(merge_requests)
+        # compute_tccn(merge_requests)
+        # compute_tc(merge_requests)
 
-        compute_af(merge_requests)
-        compute_df(merge_requests)
-        compute_cf(merge_requests)
-        compute_mf(merge_requests)
+        # compute_af(merge_requests)
+        # compute_df(merge_requests)
+        # compute_cf(merge_requests)
+        # compute_mf(merge_requests)
