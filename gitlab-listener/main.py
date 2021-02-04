@@ -20,7 +20,7 @@ from metric.jobs_number import compute_jn
 from metric.mention_number import compute_mn
 from metric.merge_time import MergeTime
 from metric.number_participants import NumberParticipants
-from metric.review_code_time import ReviewCodeTime
+from metric.review_code_time import compute_rct
 from metric.review_comments import ReviewComments
 from metric.source_code_change_number import compute_sccn
 from metric.test_code_change_number import compute_tccn
@@ -34,7 +34,6 @@ ec = EffectiveComments(gl)
 gc = GeneralComments(gl)
 mt = MergeTime(gl)
 np = NumberParticipants(gl)
-rtc = ReviewCodeTime(gl)
 rc = ReviewComments(gl)
 tfr = FirstResponseTime(gl)
 
@@ -51,6 +50,7 @@ if __name__ == '__main__':
         compute_fhr(merge_requests)
         compute_jn(project, merge_requests)
         compute_mn(merge_requests)
+        compute_rct(merge_requests)
         compute_sccn(merge_requests)
         compute_tccn(merge_requests)
         compute_tc(merge_requests)
