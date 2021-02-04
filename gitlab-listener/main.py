@@ -8,7 +8,7 @@ from control_variables.delete_files import compute_df
 from control_variables.modified_files import compute_mf
 from metric.build_correction_interval import compute_bci
 from metric.builds_number import compute_bn
-from metric.ci_latency import CiLatency
+from metric.ci_latency import compute_cl
 from metric.ci_result import compute_cr
 from metric.closure_time import ClosureTime
 from metric.commits_number import compute_cn
@@ -29,7 +29,6 @@ from metric.total_comments import compute_tc
 gl = gitlab.Gitlab.from_config('global', ['.python-gitlab.cfg'])
 project_ids = list(os.environ['PROJECTS'].split(","))
 
-cl = CiLatency(gl)
 ct = ClosureTime(gl)
 ec = EffectiveComments(gl)
 gc = GeneralComments(gl)
@@ -46,6 +45,7 @@ if __name__ == '__main__':
 
         compute_bci(merge_requests)
         compute_bn(merge_requests)
+        compute_cl(merge_requests)
         compute_cr(merge_requests)
         compute_cn(merge_requests)
         compute_fhr(merge_requests)
