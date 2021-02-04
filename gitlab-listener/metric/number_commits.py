@@ -1,1 +1,0 @@
-def compute_nc(merge_requests):
