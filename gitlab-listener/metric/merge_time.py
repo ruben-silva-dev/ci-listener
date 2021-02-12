@@ -1,6 +1,11 @@
-class MergeTime:
-    def __init__(self, gitlab):
-        self.gitlab = gitlab
+from datetime import datetime
 
-    def compute(self, project, start_date, end_date):
-        print("Merge Time")
+datetime_format = '%Y-%m-%dT%H:%M:%S.%fZ'
+
+
+def compute_mt(merge_requests):
+    for merge_request in merge_requests:
+        if not merge_request.merged_at is None:
+            start_datetime = datetime.strptime(merge_request.created_at, datetime_format)
+            end_datetime = datetime.strptime(merge_request.merged_at, datetime_format)
+            print(end_datetime - start_datetime)
