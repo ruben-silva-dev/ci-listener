@@ -1,6 +1,4 @@
-class NumberParticipants:
-    def __init__(self, gitlab):
-        self.gitlab = gitlab
-
-    def compute(self, project, start_date, end_date):
-        print("Numberos de Participantes")
+def compute_np(merge_requests):
+    for merge_request in merge_requests:
+        participants = merge_request.participants()
+        print(len(participants))
