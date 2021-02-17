@@ -1,3 +1,2 @@
-def compute_cf(merge_requests):
-    for merge_request in merge_requests:
-        print(merge_request.changes()['changes_count'])
+def compute_cf(changes):
+    return changes['changes_count']

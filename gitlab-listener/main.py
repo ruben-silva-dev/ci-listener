@@ -34,26 +34,45 @@ gc = GeneralComments(gl)
 rc = ReviewComments(gl)
 
 if __name__ == '__main__':
+    projects = []
+
     for project_id in project_ids:
-        project = gl.projects.get(project_id)
-        merge_requests = project.mergerequests.list(all=True)
+        project = {
+            'id': project_id,
+            'merge_requests': []
+        }
 
-        compute_af(merge_requests)
-        compute_cf(merge_requests)
-        compute_df(merge_requests)
-        compute_mf(merge_requests)
+        gl_project = gl.projects.get(project_id)
 
-        compute_bci(merge_requests)
-        compute_bn(merge_requests)
-        compute_cl(merge_requests)
-        compute_cr(merge_requests)
-        compute_crt(merge_requests)
-        compute_cn(merge_requests)
-        compute_frt(merge_requests)
-        compute_jn(project, merge_requests)
-        compute_mn(merge_requests)
-        compute_mt(merge_requests)
-        compute_pn(merge_requests)
-        compute_sccn(merge_requests)
-        compute_tccn(merge_requests)
-        compute_tc(merge_requests)
+        for gl_merge_request in gl_project.mergerequests.list(all=True):
+            merge_request = {
+                'id': gl_merge_request.id
+            }
+
+            gl_changes = gl_merge_request.changes()
+
+            merge_request['added_files'] = compute_af(gl_changes)
+            merge_request['total_changes'] = compute_cf(gl_changes)
+            merge_request['deleted_files'] = compute_df(gl_changes)
+            merge_request['modified_files'] = compute_mf(gl_changes)
+
+        # compute_bci(gl_merge_requests)
+        # compute_bn(gl_merge_requests)
+        # compute_cl(gl_merge_requests)
+        # compute_cr(gl_merge_requests)
+        # compute_crt(gl_merge_requests)
+        # compute_cn(gl_merge_requests)
+        # compute_frt(gl_merge_requests)
+        # compute_jn(gl_project, gl_merge_requests)
+        # compute_mn(gl_merge_requests)
+        # compute_mt(gl_merge_requests)
+        # compute_pn(gl_merge_requests)
+        # compute_sccn(gl_merge_requests)
+        # compute_tccn(gl_merge_requests)
+        # compute_tc(gl_merge_requests)
+
+            project['merge_requests'].append(merge_request)
+
+        projects.append(project)
+
+    print(projects)
