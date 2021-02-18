@@ -1,15 +1,14 @@
-def compute_bn(merge_requests):
-    for merge_request in merge_requests:
-        pipelines = merge_request.pipelines()
+def compute_bn(gl_pipelines):
+    success_count = 0
+    failed_count = 0
+    for pipeline in gl_pipelines:
+        if pipeline['status'] == 'success':
+            success_count += 1
+        elif pipeline['status'] == 'failed':
+            failed_count += 1
 
-        success_count = 0
-        failed_count = 0
-        for pipeline in pipelines:
-            if pipeline['status'] == 'success':
-                success_count += 1
-            elif pipeline['status'] == 'failed':
-                failed_count += 1
-
-        print("Total:", len(pipelines))
-        print("Success:", success_count)
-        print("Failed:", failed_count)
+    return {
+        'total_builds': len(gl_pipelines),
+        'success_builds': success_count,
+        'failed_builds': failed_count
+    }

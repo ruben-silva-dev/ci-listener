@@ -9,16 +9,15 @@ def created_at_key(note):
     return note.created_at
 
 
-def compute_frt(merge_requests):
-    for merge_request in merge_requests:
-        notes = []
-        for note in merge_request.notes.list():
-            test_bot = re.findall(bot_codacy, note.body)
-            if not note.system and not test_bot:
-                notes.append(note)
+def compute_frt(gl_merge_request, gl_notes):
+    notes = []
+    for note in gl_notes:
+        test_bot = re.findall(bot_codacy, note.body)
+        if not note.system and not test_bot:
+            notes.append(note)
 
-        if notes:
-            notes.sort(key=created_at_key)
-            start_datetime = datetime.strptime(merge_request.created_at, datetime_format)
-            end_datetime = datetime.strptime(notes[0].created_at, datetime_format)
-            print(end_datetime - start_datetime)
+    if notes:
+        notes.sort(key=created_at_key)
+        start_datetime = datetime.strptime(gl_merge_request.created_at, datetime_format)
+        end_datetime = datetime.strptime(notes[0].created_at, datetime_format)
+        return (end_datetime - start_datetime).total_seconds()

@@ -1,4 +1,2 @@
-def compute_pn(merge_requests):
-    for merge_request in merge_requests:
-        participants = merge_request.participants()
-        print(len(participants))
+def compute_pn(gl_merge_request):
+    return len(gl_merge_request.participants())

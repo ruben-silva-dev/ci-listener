@@ -1,4 +1,2 @@
-def compute_cn(merge_requests):
-    for merge_request in merge_requests:
-        commits = merge_request.commits()
-        print(len(commits))
+def compute_cn(gl_commits):
+    return len(gl_commits)
