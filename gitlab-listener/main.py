@@ -11,7 +11,7 @@ from metric.build_correction_interval import compute_bci
 from metric.builds_number import compute_bn
 from metric.ci_latency import compute_cl
 from metric.ci_result import compute_cr
-from metric.closure_time import ClosureTime
+from metric.closure_time import compute_ct
 from metric.code_review_time import compute_crt
 from metric.commits_number import compute_cn
 from metric.effective_comments import EffectiveComments
@@ -29,7 +29,6 @@ from metric.total_comments import compute_tc
 gl = gitlab.Gitlab.from_config('global', ['.python-gitlab.cfg'])
 project_ids = list(os.environ['PROJECTS'].split(","))
 
-ct = ClosureTime(gl)
 ec = EffectiveComments(gl)
 gc = GeneralComments(gl)
 rc = ReviewComments(gl)
