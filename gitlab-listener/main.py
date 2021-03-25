@@ -6,7 +6,6 @@ from control_variables.add_files import compute_af
 from control_variables.changing_files import compute_cf
 from control_variables.delete_files import compute_df
 from control_variables.modified_files import compute_mf
-from csv_util import export_csv
 from metric.build_correction_interval import compute_bci
 from metric.builds_number import compute_bn
 from metric.ci_latency import compute_cl
@@ -25,6 +24,7 @@ from metric.review_comments import ReviewComments
 from metric.source_code_changes_number import compute_sccn
 from metric.test_code_changes_number import compute_tccn
 from metric.total_comments import compute_tc
+from report.csv_report import export_csv
 
 gl = gitlab.Gitlab.from_config('global', ['.python-gitlab.cfg'])
 project_ids = list(os.environ['PROJECTS'].split(","))
