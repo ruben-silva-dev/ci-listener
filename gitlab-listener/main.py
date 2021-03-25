@@ -63,6 +63,7 @@ if __name__ == '__main__':
             merge_request.update(compute_bn(gl_pipelines))
             merge_request['ci_latency'] = compute_cl(gl_merge_request, gl_pipelines)
             merge_request['ci_result'] = compute_cr(gl_pipelines)
+            merge_request['closure_time'] = compute_ct(gl_merge_request)
             merge_request['code_review_time'] = compute_crt(gl_notes)
             merge_request['commits_number'] = compute_cn(gl_commits)
             merge_request['first_response_time'] = compute_frt(gl_merge_request, gl_notes)
