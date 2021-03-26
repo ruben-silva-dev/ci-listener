@@ -1,6 +1,7 @@
 def compute_jn(gl_project, gl_pipelines):
     success_jobs_count = 0
     failed_jobs_count = 0
+    total_jobs = 0
 
     for pipeline in gl_pipelines:
         pipeline = gl_project.pipelines.get(pipeline['id'])
@@ -12,7 +13,10 @@ def compute_jn(gl_project, gl_pipelines):
             elif job.status == 'failed':
                 failed_jobs_count += 1
 
+        total_jobs = len(jobs)
+
     return {
+        'total_jobs': total_jobs,
         'success_jobs': success_jobs_count,
         'failed_jobs': failed_jobs_count
     }
