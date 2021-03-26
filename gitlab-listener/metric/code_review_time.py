@@ -14,7 +14,7 @@ def compute_crt(gl_notes):
             notes.append(note)
 
     if notes:
-        notes.sort(key=pipeline_sort)
+        notes.sort(key=note_sort)
 
         start_datetime = datetime.strptime(notes[0].created_at, datetime_format)
         end_datetime = datetime.strptime(notes[len(notes) - 1].created_at, datetime_format)
@@ -22,5 +22,5 @@ def compute_crt(gl_notes):
         return (end_datetime - start_datetime).total_seconds()
 
 
-def pipeline_sort(note):
+def note_sort(note):
     return note.created_at

@@ -6,11 +6,12 @@ from control_variables.add_files import compute_af
 from control_variables.changing_files import compute_cf
 from control_variables.delete_files import compute_df
 from control_variables.modified_files import compute_mf
-from control_variables.mr_status import compute_mr_status
+from control_variables.mr_status import compute_mrs
 from metric.build_correction_interval import compute_bci
 from metric.builds_number import compute_bn
 from metric.ci_latency import compute_cl
 from metric.ci_result import compute_cr
+from metric.ci_run_time import compute_cirt
 from metric.closure_time import compute_ct
 from metric.code_review_time import compute_crt
 from metric.commits_number import compute_cn
@@ -60,13 +61,14 @@ if __name__ == '__main__':
                 merge_request['total_changes'] = compute_cf(gl_changes)
                 merge_request['deleted_files'] = compute_df(gl_changes)
                 merge_request['modified_files'] = compute_mf(gl_changes)
-                merge_request['status'] = compute_mr_status(gl_merge_request)
+                merge_request['status'] = compute_mrs(gl_merge_request)
 
                 merge_request['build_correction_intervals'] = compute_bci(gl_pipelines)
                 merge_request.update(compute_bn(gl_pipelines))
                 merge_request['ci_latency'] = compute_cl(gl_merge_request, gl_pipelines)
                 merge_request['ci_result'] = compute_cr(gl_pipelines)
                 merge_request['closure_time'] = compute_ct(gl_merge_request)
+                merge_request['ci_run_time'] = compute_cirt(gl_pipelines)
                 merge_request['code_review_time'] = compute_crt(gl_notes)
                 merge_request['commits_number'] = compute_cn(gl_commits)
                 merge_request['first_response_time'] = compute_frt(gl_merge_request, gl_notes)
