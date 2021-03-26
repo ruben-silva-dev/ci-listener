@@ -19,7 +19,7 @@ def compute_bci(gl_pipelines):
             start_pipeline = {}
             intervals.append((end_datetime - start_datetime).total_seconds())
 
-    return intervals
+    return ';'.join(map(str, intervals))
 
 
 def pipeline_sort(pipeline):
