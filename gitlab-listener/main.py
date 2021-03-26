@@ -6,6 +6,7 @@ from control_variables.add_files import compute_af
 from control_variables.changing_files import compute_cf
 from control_variables.delete_files import compute_df
 from control_variables.modified_files import compute_mf
+from control_variables.mr_status import compute_mr_status
 from metric.build_correction_interval import compute_bci
 from metric.builds_number import compute_bn
 from metric.ci_latency import compute_cl
@@ -58,6 +59,7 @@ if __name__ == '__main__':
             merge_request['total_changes'] = compute_cf(gl_changes)
             merge_request['deleted_files'] = compute_df(gl_changes)
             merge_request['modified_files'] = compute_mf(gl_changes)
+            merge_request['status'] = compute_mr_status(gl_merge_request)
 
             merge_request['build_correction_intervals'] = compute_bci(gl_pipelines)
             merge_request.update(compute_bn(gl_pipelines))
