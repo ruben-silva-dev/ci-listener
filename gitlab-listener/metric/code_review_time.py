@@ -5,7 +5,7 @@ datetime_format = '%Y-%m-%dT%H:%M:%S.%fZ'
 bot_codacy = "codacy-bot|Codacy"
 
 
-def compute_crt(gl_notes):
+def compute_crt(gl_merge_request, gl_notes):
     notes = []
 
     for note in gl_notes:
@@ -14,10 +14,10 @@ def compute_crt(gl_notes):
             notes.append(note)
 
     if notes:
-        notes.sort(key=note_sort)
+        notes.sort(key=note_sort, reverse=True)
 
-        start_datetime = datetime.strptime(notes[0].created_at, datetime_format)
-        end_datetime = datetime.strptime(notes[len(notes) - 1].created_at, datetime_format)
+        start_datetime = datetime.strptime(gl_merge_request.created_at, datetime_format)
+        end_datetime = datetime.strptime(notes[0].created_at, datetime_format)
 
         return (end_datetime - start_datetime).total_seconds()
 
