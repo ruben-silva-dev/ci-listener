@@ -1,6 +1,6 @@
 import csv
 
-csv_columns = ['id', 'status', 'added_files', 'total_changes', 'deleted_files', 'modified_files', 'ci_run_time',
+csv_columns = ['id', 'status', 'added_files', 'total_changes', 'deleted_files', 'modified_files',
                'build_correction_intervals', 'total_builds', 'success_builds', 'failed_builds', 'ci_latency',
                'ci_result', 'closure_time', 'code_review_time', 'commits_number', 'first_response_time', 'total_jobs',
                'success_jobs', 'failed_jobs', 'mention_number', 'merge_time', 'participants_number',

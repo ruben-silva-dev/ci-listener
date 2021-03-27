@@ -13,7 +13,7 @@ def compute_jn(gl_project, gl_pipelines):
             elif job.status == 'failed':
                 failed_jobs_count += 1
 
-        total_jobs = len(jobs)
+        total_jobs += len(jobs)
 
     return {
         'total_jobs': total_jobs,

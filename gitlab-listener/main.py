@@ -11,7 +11,6 @@ from metric.build_correction_interval import compute_bci
 from metric.builds_number import compute_bn
 from metric.ci_latency import compute_cl
 from metric.ci_result import compute_cr
-from metric.ci_run_time import compute_cirt
 from metric.closure_time import compute_ct
 from metric.code_review_time import compute_crt
 from metric.commits_number import compute_cn
@@ -68,7 +67,6 @@ if __name__ == '__main__':
                 merge_request['ci_latency'] = compute_cl(gl_merge_request, gl_pipelines)
                 merge_request['ci_result'] = compute_cr(gl_pipelines)
                 merge_request['closure_time'] = compute_ct(gl_merge_request)
-                merge_request['ci_run_time'] = compute_cirt(gl_pipelines)
                 merge_request['code_review_time'] = compute_crt(gl_notes)
                 merge_request['commits_number'] = compute_cn(gl_commits)
                 merge_request['first_response_time'] = compute_frt(gl_merge_request, gl_notes)
