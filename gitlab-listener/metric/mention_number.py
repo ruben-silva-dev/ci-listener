@@ -1,7 +1,7 @@
 import re
 
 exclusoes = ['@GetMapping', '@github.com', '@PreAuthorize', '@Secured', '@Inject', '@Inject.', '@OneToMany',
-             '@AutenticationPrincipal', '@Query', '@Query.', '@click', '@ModelAttribute']
+             '@AutenticationPrincipal', '@Query', '@Query.', '@click', '@ModelAttribute', '@PathVariable']
 
 
 def compute_mn(gl_notes):

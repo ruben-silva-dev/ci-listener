@@ -5,7 +5,7 @@ csv_columns = ['id', 'status', 'added_files', 'total_changes', 'deleted_files', 
                'ci_result', 'closure_time', 'code_review_time', 'commits_number', 'first_response_time', 'total_jobs',
                'success_jobs', 'failed_jobs', 'mention_number', 'merge_time', 'participants_number',
                'source_code_added_lines', 'source_code_removed_lines', 'test_code_added_lines',
-               'test_code_removed_lines', 'total_comments']
+               'test_code_removed_lines', 'total_comments', 'general_comments', 'review_comments', 'effective_comments']
 
 
 def export_csv(projects):

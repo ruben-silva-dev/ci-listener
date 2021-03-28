@@ -2,14 +2,14 @@ import re
 from datetime import datetime
 
 datetime_format = '%Y-%m-%dT%H:%M:%S.%fZ'
-bot_codacy = "codacy-bot|Codacy"
+bot = "codacy-bot|Codacy|SonarQube analysis"
 
 
 def compute_crt(gl_merge_request, gl_notes):
     notes = []
 
     for note in gl_notes:
-        test_bot = re.findall(bot_codacy, note.body)
+        test_bot = re.findall(bot, note.body)
         if not note.system and not test_bot:
             notes.append(note)
 
