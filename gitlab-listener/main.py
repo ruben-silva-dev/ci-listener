@@ -23,6 +23,7 @@ from metric.participants_number import compute_pn
 from metric.source_code_changes_number import compute_sccn
 from metric.test_code_changes_number import compute_tccn
 from report.csv_report import export_individual_csv, export_general_csv
+from report.graphic_report import generate_histogram
 
 gl = gitlab.Gitlab.from_config('global', ['.python-gitlab.cfg'])
 project_ids = list(os.environ['PROJECTS'].split(","))
@@ -30,52 +31,54 @@ project_ids = list(os.environ['PROJECTS'].split(","))
 if __name__ == '__main__':
     projects = []
 
-    for project_id in project_ids:
-        project = {
-            'id': project_id,
-            'merge_requests': []
-        }
+    # for project_id in project_ids:
+    #     project = {
+    #         'id': project_id,
+    #         'merge_requests': []
+    #     }
+    #
+    #     gl_project = gl.projects.get(project_id)
+    #
+    #     for gl_merge_request in gl_project.mergerequests.list(all=True):
+    #         gl_pipelines = gl_merge_request.pipelines()
+    #
+    #         if gl_merge_request.state != 'opened' and len(gl_pipelines) > 0:
+    #             merge_request = {
+    #                 'id': gl_merge_request.id
+    #             }
+    #
+    #             gl_changes = gl_merge_request.changes()
+    #             gl_notes = gl_merge_request.notes.list()
+    #             gl_commits = gl_merge_request.commits()
+    #
+    #             merge_request['added_files'] = compute_af(gl_changes)
+    #             merge_request['total_changes'] = compute_cf(gl_changes)
+    #             merge_request['deleted_files'] = compute_df(gl_changes)
+    #             merge_request['modified_files'] = compute_mf(gl_changes)
+    #             merge_request['status'] = compute_mrs(gl_merge_request)
+    #
+    #             merge_request['build_correction_intervals'] = compute_bci(gl_pipelines)
+    #             merge_request.update(compute_bn(gl_pipelines))
+    #             merge_request['ci_latency'] = compute_cl(gl_merge_request, gl_pipelines)
+    #             merge_request['ci_result'] = compute_cr(gl_pipelines)
+    #             merge_request['closure_time'] = compute_ct(gl_merge_request)
+    #             merge_request['code_review_time'] = compute_crt(gl_merge_request, gl_notes)
+    #             merge_request['commits_number'] = compute_cn(gl_commits)
+    #             merge_request['first_response_time'] = compute_frt(gl_merge_request, gl_notes)
+    #             merge_request.update(compute_jn(gl_project, gl_pipelines))
+    #             merge_request['mention_number'] = compute_mn(gl_notes)
+    #             merge_request['merge_time'] = compute_mt(gl_merge_request)
+    #             merge_request['participants_number'] = compute_pn(gl_merge_request)
+    #             merge_request.update(compute_sccn(gl_changes))
+    #             merge_request.update(compute_tccn(gl_changes))
+    #             merge_request.update(compute_comments(gl_notes))
+    #
+    #             project['merge_requests'].append(merge_request)
+    #
+    #     projects.append(project)
+    #
+    # export_individual_csv(projects)
+    # export_general_csv(projects)
 
-        gl_project = gl.projects.get(project_id)
-
-        for gl_merge_request in gl_project.mergerequests.list(all=True):
-            gl_pipelines = gl_merge_request.pipelines()
-
-            if gl_merge_request.state != 'opened' and len(gl_pipelines) > 0:
-                merge_request = {
-                    'id': gl_merge_request.id
-                }
-
-                gl_changes = gl_merge_request.changes()
-                gl_notes = gl_merge_request.notes.list()
-                gl_commits = gl_merge_request.commits()
-
-                merge_request['added_files'] = compute_af(gl_changes)
-                merge_request['total_changes'] = compute_cf(gl_changes)
-                merge_request['deleted_files'] = compute_df(gl_changes)
-                merge_request['modified_files'] = compute_mf(gl_changes)
-                merge_request['status'] = compute_mrs(gl_merge_request)
-
-                merge_request['build_correction_intervals'] = compute_bci(gl_pipelines)
-                merge_request.update(compute_bn(gl_pipelines))
-                merge_request['ci_latency'] = compute_cl(gl_merge_request, gl_pipelines)
-                merge_request['ci_result'] = compute_cr(gl_pipelines)
-                merge_request['closure_time'] = compute_ct(gl_merge_request)
-                merge_request['code_review_time'] = compute_crt(gl_merge_request, gl_notes)
-                merge_request['commits_number'] = compute_cn(gl_commits)
-                merge_request['first_response_time'] = compute_frt(gl_merge_request, gl_notes)
-                merge_request.update(compute_jn(gl_project, gl_pipelines))
-                merge_request['mention_number'] = compute_mn(gl_notes)
-                merge_request['merge_time'] = compute_mt(gl_merge_request)
-                merge_request['participants_number'] = compute_pn(gl_merge_request)
-                merge_request.update(compute_sccn(gl_changes))
-                merge_request.update(compute_tccn(gl_changes))
-                merge_request.update(compute_comments(gl_notes))
-
-                project['merge_requests'].append(merge_request)
-
-        projects.append(project)
-
-    export_individual_csv(projects)
-    export_general_csv(projects)
+    generate_histogram()
 
