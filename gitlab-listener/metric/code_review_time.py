@@ -21,6 +21,8 @@ def compute_crt(gl_merge_request, gl_notes):
 
         return (end_datetime - start_datetime).total_seconds()
 
+    return 0
+
 
 def note_sort(note):
     return note.created_at

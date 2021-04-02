@@ -1,5 +1,4 @@
 import os
-import time
 
 import gitlab
 
@@ -23,7 +22,7 @@ from metric.merge_time import compute_mt
 from metric.participants_number import compute_pn
 from metric.source_code_changes_number import compute_sccn
 from metric.test_code_changes_number import compute_tccn
-from report.csv_report import export_csv
+from report.csv_report import export_individual_csv, export_general_csv
 
 gl = gitlab.Gitlab.from_config('global', ['.python-gitlab.cfg'])
 project_ids = list(os.environ['PROJECTS'].split(","))
@@ -77,5 +76,6 @@ if __name__ == '__main__':
 
         projects.append(project)
 
-    export_csv(projects)
+    export_individual_csv(projects)
+    export_general_csv(projects)
 

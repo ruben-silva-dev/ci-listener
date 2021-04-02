@@ -9,4 +9,4 @@ def compute_mt(gl_merge_request):
         end_datetime = datetime.strptime(gl_merge_request.updated_at, datetime_format)
         return (end_datetime - start_datetime).total_seconds()
 
-    return None
+    return 0

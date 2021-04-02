@@ -8,7 +8,7 @@ csv_columns = ['id', 'status', 'added_files', 'total_changes', 'deleted_files', 
                'test_code_removed_lines', 'total_comments', 'general_comments', 'review_comments', 'effective_comments']
 
 
-def export_csv(projects):
+def export_individual_csv(projects):
     for project in projects:
         try:
             with open(project['id'] + ".csv", 'w', newline='') as csvfile:
@@ -18,3 +18,15 @@ def export_csv(projects):
                     writer.writerow(merge_request)
         except IOError:
             print("I/O error")
+
+
+def export_general_csv(projects):
+    try:
+        with open("general.csv", 'w', newline='') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+            writer.writeheader()
+            for project in projects:
+                for merge_request in project['merge_requests']:
+                    writer.writerow(merge_request)
+    except IOError:
+        print("I/O error")

@@ -21,3 +21,5 @@ def compute_frt(gl_merge_request, gl_notes):
         start_datetime = datetime.strptime(gl_merge_request.created_at, datetime_format)
         end_datetime = datetime.strptime(notes[0].created_at, datetime_format)
         return (end_datetime - start_datetime).total_seconds()
+
+    return 0
