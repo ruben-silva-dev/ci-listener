@@ -5,7 +5,7 @@ datetime_format = '%Y-%m-%dT%H:%M:%S.%fZ'
 bot = "codacy-bot|Codacy|SonarQube analysis"
 
 
-def compute_crt(gl_merge_request, gl_notes):
+def compute_cmt(gl_merge_request, gl_notes):
     notes = []
 
     for note in gl_notes:
